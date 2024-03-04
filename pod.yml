@@ -1,0 +1,15 @@
+###as we know that all the communicate to your k8s cluster will happen using apigateway
+##accoding to your object 
+apiVersion: v1 
+kind: Pod ####kind means which api i am running 
+##when you want to invoke the object it need to run using a name
+metadata: 
+  name: nginx
+###when you are creating a pod you need to define the specification about the pod
+spec:
+  #####inside my pod 
+  containers:
+  - name: nginx 
+    image: nginx:1.14.2 ##this image by default will come from hub.docker.com
+    ports:
+    - containerPort: 80
