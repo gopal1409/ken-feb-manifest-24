@@ -12,7 +12,7 @@ metadata:
 spec:
   replicas: 3 #it will create three pod
   selector: ###this pod need to be mapped with your deployment
-    matchLabel: ##it is like match expression
+    matchLabels: ##it is like match expression
       app: nginx  ##same label given so all the pod will have the same label. 
   ##all the three pod need to have similar configuration also 
   template: ##this is the template which will be applied to alkl the pod
