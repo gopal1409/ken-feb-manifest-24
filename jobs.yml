@@ -1,0 +1,13 @@
+apiVersion: batch/v1
+kind: Job 
+metadata: 
+  name: nodeapp-deadline
+spec:
+  activeDeadlineSeconds: 15
+  template:
+    spec:
+      containers:
+        - name: nodeapp 
+          image: alpine 
+          command: ["sleep","40"]
+      restartPolicy: Never 

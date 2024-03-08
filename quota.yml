@@ -1,0 +1,11 @@
+apiVersion: v1 
+kind: ResourceQuota
+metadata: 
+  name: mem-cpu-demo
+  namespace: dev
+spec:
+  hard:
+    requests.cpu: "1" ###the total request for all pods in that namespace will not exceed more than one gb
+    requests.memory: 1Gi
+    limits.cpu: "2" #limit total for all the pods in that namespace not exceed 2GB
+    limits.memory: 2Gi

@@ -1,0 +1,31 @@
+apiVersion: apps/v1 
+kind: Deployment 
+##using metadata.name we will define the name of the deployment
+metadata:
+  name: nginx-cpu
+  labels:
+  ###this is the label for your deployment. label format will be in key value format
+    app: nginx 
+    #gopal: das
+    ##the key and value can be anything
+    #label work as an identifier
+spec:
+  replicas: 3 #it will create three pod
+  selector: ###this pod need to be mapped with your deployment
+    matchLabels: ##it is like match expression
+      app: nginx  ##same label given so all the pod will have the same label. 
+  ##all the three pod need to have similar configuration also 
+  template: ##this is the template which will be applied to alkl the pod
+    metadata:
+      labels: ##template need to be mapped with your pod
+        app: nginx 
+    spec:  #this is the specification about template which is like container specification
+      containers:
+      - name: nginx  
+        image: nginx:1.14.2 
+        ports:
+        - containerPort: 80
+        resources:
+          #you must always specify request for cpu to autoscale based on cpu utilziation
+          requests:
+            cpu: "250m"

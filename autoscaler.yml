@@ -1,0 +1,32 @@
+apiVersion: autoscale/v2
+kind: HorizontalPodAutoscaler
+metadata:
+  name: nginx-autoscale
+spec:
+  scaleTargetRef: ###the hpa required infomration about the deployment
+    apiVersion: apps/v1
+    kind: Deployment
+    name: nginx-autoscale
+  minReplicas: 5
+  maxReplicas: 10
+  metrics:
+  - type: Resource
+    resource:
+      name: cpu
+      target:
+        type: Utilization
+        averageUtilization: 50
+  - type: Resource 
+    resource:
+      name: memory 
+      target: 
+        type: AverageValue 
+        averageValue: 100Mi
+#  - type: Pods 
+ #     pods: 
+  #    metrics: 
+   #     name: packet_per_second
+    #  target: 
+     #   type: AverageValue 
+      #  averageValue: 100
+

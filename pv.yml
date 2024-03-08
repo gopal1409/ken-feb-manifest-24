@@ -1,0 +1,16 @@
+apiVersion: v1 
+kind: PersistentVolume
+metadata:
+  name: task-pv-volume
+spec:
+  capacity:
+    storage: 10Gi
+  volumeMode: Filesystem
+  #storageClassName: "gopal" 
+  accessModes:
+    - ReadWriteOnce #read #readwritemany
+  #persistentVolumeReclaimPolicy: Recycle it means that when attach a pod if the pod get deleted the volume
+  ##will not be deleted but the data inside the volume deleted
+  #storageClassName: slow
+  hostPath:
+    path: /mnt/data

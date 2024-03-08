@@ -1,0 +1,28 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    app: target
+  name: target2
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: target
+  strategy: {}
+  template:
+    metadata:
+      labels:
+        app: target
+    spec:
+      containers:
+      - image: mysql 
+        name: nginx
+        ports:
+          - containerPort: 3306
+        readinessProbe:
+          initialDelaySeconds: 15
+          periodSeconds: 10
+          
+          tcpSocket:
+            port: 3306

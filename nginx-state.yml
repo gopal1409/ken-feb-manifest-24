@@ -1,0 +1,38 @@
+apiVersion: apps/v1
+kind: StatefulSet
+metadata:
+  creationTimestamp: null
+  labels:
+    run: nginx
+  name: nginx-state
+spec:
+  replicas: 2
+  serviceName: "nginx-headless"
+  selector:
+    matchLabels:
+      run: nginx
+  minReadySeconds: 10
+  template:
+    metadata:
+      labels:
+        run: nginx
+    spec:   
+      containers:
+      - name: task-pv-pod
+        image: nginx
+        ports:
+        - containerPort: 80
+        volumeMounts: #add this line
+        - name: web 
+          mountPath: "/usr/share/nginx/html" ###add this line
+        
+  volumeClaimTemplates:
+  - metadata:
+      name: web
+    spec: 
+      accessModes:
+        - "ReadWriteOnce"
+      storageClassName: "local-path"
+      resources: 
+        requests:
+          storage: 1Gi 

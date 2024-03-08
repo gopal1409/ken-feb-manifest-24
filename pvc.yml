@@ -1,0 +1,12 @@
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: task-pv-claim
+spec:
+  resources:
+    requests:
+      storage: 10Gi
+  #storageClassName: "gopal" 
+  volumeMode: Filesystem ##it will auto detect what type of file systemy you NTFS ext
+  accessModes:
+    - ReadWriteOnce
